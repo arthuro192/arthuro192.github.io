@@ -1,0 +1,877 @@
+
+/* MAQUETTE | LEGEND_COLOR ######################################################################################################################################### */
+
+/* You have to uncomment this section (line 15 to 29), to see all the different colour borders on the HTML page.
+The coloured borders represent all the blocks drawn on the model.
+One colour = one specific layer/depth level & one specific indentation level.
+The result must be identical.
+
+.bd_black  = Layer_1 (L1/indentation n°0) + Layer_6 (L6/indentation n°5) + Layer_11 (L11/indentation n°10)
+.bd_blue   = Layer_2 (L2/indentation n°1) + Layer_7 (L7/indentation n°6)
+.bd_yellow = Layer_3 (L3/indentation n°2) + Layer_8 (L8/indentation n°7)
+.bd_red    = Layer_4 (L4/indentation n°3) + Layer_9 (L9/indentation n°8)
+.bd_green  = Layer_5 (L5/indentation n°4) + Layer_10 (L10/indentation n°9) de*/
+
+// .bd_black {
+//     border: 3px solid #000000
+// }
+// .bd_blue {
+//     border: 3px solid #0077b6
+// }
+// .bd_yellow {
+//     border: 3px solid #ffc300
+// }
+// .bd_red {
+//     border: 3px solid #9d0208
+// }
+// .bd_green {
+//     border: 3px solid #70e000
+// }
+
+/* GENERAL ######################################################################################################################################################### */
+
+/* MIXINS ###################################################################### */
+
+@mixin flex ($direct: null, $just: center, $align: center, $gap: null) {
+    display: flex;
+    flex-direction: $direct;
+    justify-content: $just;
+    align-items: $align;
+    gap: $gap;
+}
+@mixin position ($position: absolute, $top: null, $right: null, $bott: null, $left: null) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bott;
+    left: $left;
+}
+@mixin size ($width: null, $max: null, $height: null) {
+    width: $width;
+    max-width: $max;
+    height: $height;
+}
+@mixin font ($size: null, $weight: null) {
+    font-size: $size;
+    font-weight: $weight;
+}
+@mixin animation ($name: null, $duration: null, $timing: null, $delay: null, $iteration: null, $direction: null, $fill: null, $play: null) {
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-timing-function: $timing;
+    animation-delay: $delay;
+    animation-iteration-count: $iteration;
+    animation-direction: $direction;
+    animation-fill-mode: $fill;
+    animation-play-state: $play;
+}
+
+/* EXTENDS ##################################################################### */
+
+%section-title {
+    @include font($size: 24px, $weight: 700);
+}
+%font-01 {
+    @include font($size: 16px, $weight: 500);
+}
+%btn {
+    @include size($height: 50px);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(to bottom, #FF79DA -11.44%, #9356DC 123.93%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+%heart {
+    @include position;
+    @include size($width: 22px, $height: 21px)
+}
+
+/* ANIMATIONS ################################################################## */
+
+@keyframes loader {
+    0% {
+        opacity: 100%;
+    }
+    99% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
+        visibility: hidden;
+    }
+}
+@keyframes loader__ring {
+    0%,10% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes loader__txt {
+    0% {
+        transform: translateX(-2000px);
+    }
+    10% {
+        transform: translateX(-30px);
+    }
+    90% {
+        transform: translateX(30px);
+    }
+    100% {
+        transform: translateX(2000px);
+    }
+}
+@keyframes loader__line {
+    0% {
+        transform: translateX(2000px);
+    }
+    10% {
+        transform: translateX(30px);
+    }
+    90% {
+        transform: translateX(-30px);
+    }
+    100% {
+        transform: translateX(-2000px);
+    }
+}
+@keyframes anim_stickers {
+    0% {
+        transform: perspective(500px) rotateX(80deg);
+    }
+    100% {
+        transform: perspective(500px) rotateX(0deg);
+    }
+}
+@keyframes anim_stickers_unit {
+    0% {
+        transform: perspective(500px) rotateX(160deg);
+    }
+    100% {
+        transform: perspective(500px) rotateX(0deg);
+    }
+}
+
+/* COLORS ###################################################################### */
+
+$color-01: #9356DC;
+$color-02: #99E2D0;
+$color-03: #353535;
+$color-04: #F7F7F7;
+$color-locate: #EAEAEA;
+$color-icons: #7E7E7E;
+$color-new: #008766;
+
+/* FONTS ####################################################################### */
+
+$font-roboto: 'Roboto', sans-serif;
+$font-shrikhand: 'Shrikhand', cursive;
+
+.section-title {
+    @extend %section-title;
+}
+.card-title {
+    @include font($size: 18px,$weight: 700);
+}
+.plate-title {
+    @include font($size: 18px,$weight: 500);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-subtitle {
+    @include font($size: 17px,$weight: 300);
+}
+.font-01 {
+    @extend %font-01;
+}
+.plate-price {
+    @include font($size: 15.04px,$weight: 700);
+    @include position($right: 15px);
+    background: white;
+}
+.plate-subtitle {
+    @include font($size: 15.04px,$weight: 300);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.txt-num {
+    @include font($size: 14.18px,$weight: 500);
+}
+.txt-new {
+    @include font($size: 14px,$weight: 500);
+}
+
+/* COMMON ###################################################################### */
+
+* {
+    margin: 0px;
+    font-family: $font-roboto;
+}
+body {
+    @include flex($direct: column);
+}
+main {
+    @include size($width: 100%, $max: 1440px);
+}
+img {
+    object-fit: cover;
+}
+a:any-link {
+    display: contents;
+    text-decoration: none;
+    color: black;
+  }
+
+/* LOADER ########################################################################################################################################################## */
+
+.loader {
+    @include flex($direct: column);
+    @include position($position: fixed);
+    @include size($width: 100%, $height: 100%);
+    @include animation($name: loader, $duration: 3000ms, $fill: both);
+    top: 0px;
+    z-index: 1;
+    background: white;
+
+    &__ring {
+        @include size($width: 150px, $height: 150px);
+        @include animation($name: loader__ring, $duration: 3000ms, $fill: both);
+        border: 3.75px solid #610698;
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px 0px black;
+        background: $color-04;
+        z-index: 0;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include size($width: 200px, $height: 200px);
+            border: 5px solid #610698;
+        }
+
+    }
+    &__txt {
+        @include position($position: relative, $top: -120px);
+        @include size($height: 45px);
+        @include font($size: 45px);
+        @include animation($name: loader__txt, $duration: 3000ms, $timing: ease-in, $delay: 100ms, $fill: both);
+        font-family: $font-shrikhand;
+        z-index: 2;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include position($position: relative, $top: -164px);
+            @include size($height: 60px);
+            @include font($size: 4em);
+        }
+
+    }
+    &__line {
+        @include position($position: relative, $top: -120px);
+        @include size($width: 375px, $height: 7.5px);
+        @include animation($name: loader__line, $duration: 3000ms, $timing: ease-in, $fill: both);
+        background: linear-gradient(to right, white 0%, #d95dca 10%, white 50%, #610698 90%, white 100%);
+        z-index: 1;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include position($position: relative, $top: -160px);
+            @include size($width: 500px, $height: 10px);
+        }
+
+    }
+
+}
+
+/* HEADER ########################################################################################################################################################## */
+
+.main-header {
+    @include flex;
+    @include position($position: relative);
+    @include size($width: 100%, $max: 1440px);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+
+    &__div {
+        @include flex;
+        @include position($left: 17px);
+        @include size($width: 30px, $height: 30px);
+        background: white;
+
+        &-arrow {
+            @include font($size: 19.5px)
+        }
+
+    }
+    &__title {
+        font-family: $font-shrikhand;
+        @include font($size: 30px,$weight: 400);
+        margin: 14px 0px 5px 0px;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            display: none;
+            margin: 0px;
+        }
+
+    }
+    &__img {
+        display: none;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            display: block;
+            @include size($width: 200px, $height: 34.2px);
+            margin: 30px 0px 31.8px 0px;
+        }
+
+    }
+
+}
+
+/* MAIN ############################################################################################################################################################ */
+
+/* LOCATION #################################################################### */
+
+.location {
+    @include flex ($gap: 17px);
+    @include size($height: 50px);
+    color: $color-03;
+    background: $color-locate;
+}
+
+/* INTRO ####################################################################### */
+
+.intro {
+    @include flex($direct: column);
+    text-align: center;
+    background: $color-04;
+
+    // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+    @media (min-width: 767.99px) {
+        @include flex($gap: 18px);
+    }
+
+    &__section-title {
+        @extend %section-title;
+        @include size($height: 68px);
+        margin: 39.5px 58px 0px 42px;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include size($height: 47px);
+            @include font($size: 40px, $weight: 700);
+            margin: 30px 0px 0px 0px;
+        }
+
+    }
+    &__txt-intro {
+        @include font($size: 18px,$weight: 300);
+        margin: 0px 26px 27px 34px;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            margin: 0px 455.5px 0px 453.5px;
+            height: 46px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 531px;
+        }
+
+    }
+    &__btn {
+        @extend %btn;
+        @include flex;
+        @include size($width: 218px);
+        margin: 0px 75px 57px 82px;
+        transition: opacity 500ms;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            margin: 0px 624.5px 30px 597.5px;
+        }
+
+        &:hover {
+            opacity: 0.85;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.35);
+
+            & .intro__btn-txt {
+              display: inline-block;
+              transform: translateY(-1px);
+            }
+
+        }
+
+    }
+
+}
+
+/* FUNCTION #################################################################### */
+
+.function {
+    @include flex($direct: column, $align: flex-start, $gap: 26px);
+    padding: 48px 20px 68px 20px;
+
+    // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+    @media (min-width: 767.99px) {
+        @include flex($align: flex-start, $gap: 25px);
+        padding: 50px 180px;
+    }
+
+    &__stickers {
+        @include flex($direct: column, $align: null, $gap: 25px);
+        @include size($width: 100%);
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include flex($direct: row);
+        }
+
+        &-unit {
+            @include flex;
+            @include position($position: relative);
+            @include size($height: 72.38px);
+            background: $color-04;
+            border-radius: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+            margin-left: 12.51px;
+
+            // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+            @media (min-width: 767.99px) {
+                @include size($width: 100%);
+                min-width: 200px;
+            }
+
+            &-ring {
+                @include flex;
+                @include position($left: -12.51px);
+                @include size($width: 24px, $height: 24px);
+                color: white;
+                background: $color-01;
+                border-radius: 14px;
+            }
+            &-icon {
+                @include position($left: 34.5px);
+                color: $color-icons;
+            }
+            &-font01 {
+                @extend %font-01;
+                @include position($left: 73.49px);
+            }
+
+        }
+
+        &-unit:hover {
+            .function__stickers-unit-icon {
+                color: $color-01;
+            }
+        }
+
+    }
+
+}
+
+/* RESTAURANTS ################################################################# */
+
+.restaur {
+    @include flex($direct: column, $align: flex-start, $gap: 24px);
+    padding: 54px 18px 66px 17px;
+    background: $color-04;
+
+    // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+    @media (min-width: 767.99px) {
+        @include flex($align: flex-start, $gap: 28px);
+        padding: 30px 180px;
+    }
+
+    &__cards {
+        @include flex($direct: column, $gap: 18px);
+        @include size($width: 100%);
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include flex($gap: 50px);
+        }
+
+        &-grp {
+            @include flex($direct: column, $gap: 18px);
+            @include size($width: 100%);
+
+            // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+            @media (min-width: 767.99px) {
+                @include flex($direct: row, $gap: 100px);
+            }
+
+            &-unit {
+                @include flex($direct: column, $align: null);
+                @include position($position: relative);
+                @include size($width: 100%);
+                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+                border-radius: 0px 0px 15px 15px;
+
+                // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+                @media (min-width: 767.99px) {
+                    min-width: 250px;
+                }
+    
+                &-img {
+                    @include size($width: 100%, $height: 174px);
+                    border-radius: 15px 15px 0px 0px;
+                }
+                &-new {
+                    @include flex;
+                    @include position($top: 13px, $right: 12px);
+                    @include size($width: 80px, $height: 29px);
+                    color: $color-new;
+                    background: $color-02;
+                    border-radius: 2px;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    
+                    // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+                    @media (min-width: 767.99px) {
+                        @include position($top: 13px, $right: 17.59px);
+                    }
+    
+                }
+                &-content {
+                    @include flex($direct: column, $align: flex-start, $gap: 5px);
+                    @include position($position: relative);
+                    @include size($height: 77px);
+                    padding-left: 13px;
+    
+                    // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+                    @media (min-width: 767.99px) {
+                        padding-left: 18.74px;
+                    }
+                    .heart {
+                        @include position($top: 23px, $right: 25px);
+                        @include size($width: 22px, $height: 21px);
+
+                        &__before {
+                            @extend %heart;
+                        }
+                        &__after {
+                            @extend %heart;
+                            opacity: 0;
+                            transition: opacity 1s, transform 1s 0.1s;
+
+                            &:hover {
+                                opacity: 1;
+                                transform: scale(1.2);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+    
+            }
+
+        }
+
+    }
+
+}
+
+/* MENU-IMG #################################################################### */
+
+.menu-img {
+    @include size($height: 275px);
+
+    // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+    @media (min-width: 767.99px) {
+        @include size($height: 383px);
+    }
+
+    &__img {
+        @include size($width: 100%, $height: 275px);
+        z-index: 1;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include size($height: 383px);
+        }
+
+    }
+
+}
+
+/* MENU ######################################################################## */
+
+.menu {
+    @include flex($direct: column, $gap: 40px);
+    @include position($position: relative);
+    padding: 32px 13px 40px 13px;
+    margin-top: -55px;
+    background: $color-04;
+    border-radius: 40px 40px 0px 0px;
+    z-index: 2;
+
+    // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+    @media (min-width: 767.99px) {
+        padding: 51px 211px 40px 210px;
+        margin: -55px 192px 0px 193px;
+    }
+
+    &__div {
+        @include position($position: relative);
+        @include size($width: 100%);
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include size($width: 307px);
+        }
+
+        &-title {
+            font-family: $font-shrikhand;
+            @include font($size: 28px,$weight: 400);
+            @include size($height: 35px);
+            margin: 0px 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+            @media (min-width: 767.99px) {
+                @include size($height: 41px);
+                margin: 0px;
+            }
+
+        }
+        .heart {
+            @include position($top: 8px, $right: 24px);
+            @include size($width: 22px, $height: 21px);
+
+            // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+            @media (min-width: 767.99px) {
+                @include position($top: 10px, $right: 0px);
+            }
+
+            &__before {
+                @extend %heart;
+            }
+            &__after {
+                @extend %heart;
+                opacity: 0;
+                transition: opacity 1s, transform 1s 0.1s;
+
+                &:hover {
+                    opacity: 1;
+                    transform: scale(1.2);
+                }
+
+            }
+
+        }
+
+    }
+    &__stickers {
+        @include flex($direct: column, $align: flex-start, $gap: 12px);
+        @include size($width: 100%);
+        animation: anim_stickers 1000ms ease-out;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            min-width: 200px;
+        }
+
+        &-title {
+            @include size($width: 40px, $height: 27px);
+            @include font($size: 16px,$weight: 300);
+            border-bottom: 3px solid $color-02;
+            box-sizing: border-box;
+        }
+        &-unit {
+            @include flex($just: space-between, $align: end);
+            @include position($position: relative);
+            @include size($width: 100%, $height: 69px);
+            padding: 12px 15px;
+            box-sizing: border-box;
+            border-radius: 15.0431px;
+            box-shadow: 0px 4.01149px 15.0431px rgba(0, 0, 0, 0.1);
+            background: white;
+            overflow: hidden;
+            animation: anim_stickers_unit 2000ms ease-out;
+
+            &-plate {
+                @include flex($direct: column, $align: flex-start, $gap: 5px);
+                overflow: hidden;
+                white-space: nowrap;
+
+                * {
+                    @include size($width: 100%);
+                }
+
+            }
+            &-check {
+                @include flex;
+                @include position($position: relative, $left: 74px);
+                @include size($width: 59px, $height: 69px);
+                margin: -12px 0px;
+                @include font($size: 20px);
+                color: white;
+                background: $color-02;
+            }
+            & > &-check, .plate-price {
+                transition: all 250ms linear;
+            }
+            &:hover &-check {
+                transform: translateX(-59px);
+            }
+            &:hover .plate-price {
+                transform: translateX(-59px);
+            }
+
+        }
+
+    }
+    &__btn {
+        @extend %btn;
+        @include flex;
+        @include size($width: 186px);
+        transition: opacity 500ms;
+
+        &:hover {
+            opacity: 0.85;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.35);
+
+            & .menu__btn-txt {
+              display: inline-block;
+              transform: translateY(-1px);
+              color: white;
+            }
+
+        }
+
+    }
+
+}
+
+/* FOOTER ########################################################################################################################################################## */
+
+.main-footer {
+    @include flex($direct: column, $align: flex-start, $gap: 16px);
+    @include size($width: 100%, $max: 1440px);
+    padding: 22px 25px;
+    box-sizing: border-box;
+    color: white;
+    background: $color-03;
+
+    // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+    @media (min-width: 767.99px) {
+        @include flex($direct: row-reverse, $just: end, $align: end);
+        @include size($width: 100%, $max: 1440px, $height: 114px);
+        padding: 30px 25px;;
+    }
+
+    &__title {
+        font-family: $font-shrikhand;
+        @include size($width: 137.58px);
+        @include font($size: 18px,$weight: 400);
+    }
+    &__ul {
+        @include flex($direct: column, $align: flex-start, $gap: 7px);
+        padding-left: 0px;
+        list-style-type: none;
+
+        // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+        @media (min-width: 767.99px) {
+            @include flex($direct: row);
+        }
+
+        &icon {
+            @include position($position: relative);
+
+            &-cutlery {
+                @include font($size: 13px);
+                vertical-align: middle;
+            }
+            &-hand {
+                @include size($width: 11.92px, $height: 13px);
+                vertical-align: middle;
+            }
+            &-span {
+                white-space: nowrap;
+
+                // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+                @media (min-width: 767.99px) {
+                    display: inline-block;
+                    @include size($width: 168px);
+                }
+
+            }
+
+        }
+        &i {
+
+            // MEDIUM/NORMAL_DEVICES (TABLETS/DESKTOPS, EQUAL/MORE THAN 767.99px)
+            @media (min-width: 767.99px) {
+                width: 130px;
+           }
+
+        } 
+        &-mail:any-link {
+            display: block;
+            text-decoration: none;
+            color: white;
+            // width: 130px;
+        }
+
+    }
+
+}
+
+/* NOTES ########################################################################################################################################################### */
+
+/* FONTS ####################################################################### */
+
+/* "Shrikhand" font :
+- font-size: 40px + font-weight: 700;
+    > X? elements style | Existing class NO_to be create = %section-title
+- font-size: 30px + font-weight: 400;
+    > X1 element style | Existing class NO_to be create = main-header__title
+- font-size: 28px + font-weight: 400;
+    > X1 element style | Existing class NO_to be create = menu__restaur-title
+- font-size: 18px + font-weight: 400;
+    > X1 element style | Existing class NO_to be create = main-footer__title
+
+"Roboto" font :
+- font-size: 24px + font-weight: 700;
+    > X2 elements style | Existing class NO_to be create = %section-title
+- font-size: 18px + font-weight: 700;
+    > X1 element style | Existing class NO_to be create = card-title
+- font-size: 18px + font-weight: 500;
+    > X1 element style | Existing class NO_to be create = plate-title
+- font-size: 18px + font-weight: 300;
+    > X1 element style | Existing class NO_to be create = intro__txt-intro
+- font-size: 17px + font-weight: 300;
+    > X1 element style | Existing class NO_to be create = card-subtitle
+- font-size: 16px + font-weight: 500;
+    > X4 elements style | Existing class NO_to be create = %font-01
+    > (h2 default is 24px + font-weight: 700)
+- font-size: 16px + font-weight: 400;
+    > X? elements style | Existing class NO, no need, because this is the default configuration of the browser.
+- font-size: 16px + font-weight: 300;
+    > X1 element style | Existing class NO_to be create = menu__stickers-title
+- font-size: 15.04px + font-weight: 700;
+    > X1 element style | Existing class NO_to be create = plate-price
+- font-size: 15.04px + font-weight: 300;
+    > X1 element style | Existing class NO_to be create = plate-subtitle
+- font-size: 14.18px + font-weight: 500;
+    > X1 element style | Existing class NO_to be create = txt-num
+- font-size: 14px + font-weight: 500;
+    > X1 element style | Existing class NO_to be create = txt-new
+
+On an imported font, to be able to apply a {font-weight: 700} for example and have it work,
+you must also import the font style corresponding to the font-weight at 700, otherwise it will not work and no difference will be visible.
+-----------------------------------------------------------
+Generally, the default browser font size is 16px, with a font-weight of 400.
+-----------------------------------------------------------
+By default, an h* title is automatically assigned a size in pixels, depending on its title level (h1,h2,h3 etc) and
+an automatic font-weight of 700 (Bold), whatever its title level. */
