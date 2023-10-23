@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="node_modules\simplelightbox\dist\simple-lightbox_custom.css" rel="stylesheet" type="text/css" /> <!-- RAJOUT_LIGHTBOX -->
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Fisheye - photographe </title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
+      </a>
+    </header>
+    <main id="main">
+      <div class="photograph_header">
+        <button class="btn_red" onclick="displayModal()">Contactez-moi</button> <!--Nom accessible = "Contact Me"-->
+      </div>
+      <div class="photograph_filter">
+      </div>
+    </main>
+    <div id="contact_modal">
+			<div class="modal">
+				<header class="modal_header">
+          <h1>Contactez-moi<br></h1>
+          <img src="assets/icons/close.svg" onclick="closeModal()" />
+        </header>
+				<form method="get" action="">
+						<label for="first_name">Prénom</label>
+						<input type="text" name="first_name" id="first_name" required autofocus/>
+            <label for="last_name">Nom</label>
+						<input type="text" name="last_name" id="last_name" required/>
+            <label for="email">Email</label>
+						<input type="email" name="email" id="email" required/>
+            <label for="your_message">Votre message</label>
+						<textarea name="your_message" id="your_message" required></textarea>
+          <button class="btn_red">Envoyer</button>
+				</form>
+			</div>
+		</div>
+    <script src="/node_modules/simplelightbox/dist/simple-lightbox.js"></script> <!--RAJOUT_LIGHTBOX-->
+    <script type="module" src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
+  </body>
+</html>
